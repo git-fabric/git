@@ -53,12 +53,12 @@ async function registerWithGateway() {
     tailscale_node: 'fabric-git',
     worker_pool: { total: 0, healthy: 0, workers: [] },
     routes: [
-      { prefix: 'fabric.git', local_pref: 100, description: 'Git and GitHub operations — repos, commits, branches, PRs, files' },
-      { prefix: 'fabric.git.repos', local_pref: 100, description: 'Repository management — list, create, delete repos' },
-      { prefix: 'fabric.git.commits', local_pref: 100, description: 'Commit operations — list, get, compare, push commits' },
-      { prefix: 'fabric.git.branches', local_pref: 100, description: 'Branch management — list, create, delete, protect branches' },
-      { prefix: 'fabric.git.pulls', local_pref: 100, description: 'Pull request operations — list, get, create, merge PRs' },
-      { prefix: 'fabric.git.files', local_pref: 100, description: 'File operations — get file content, list directory trees' },
+      { prefix: 'fabric.git', local_pref: 100, confidence_floor: 0.7, description: 'Git and GitHub operations — repos, commits, branches, PRs, files' },
+      { prefix: 'fabric.git.repos', local_pref: 100, confidence_floor: 0.7, description: 'Repository management — list, create, delete repos' },
+      { prefix: 'fabric.git.commits', local_pref: 100, confidence_floor: 0.7, description: 'Commit operations — list, get, compare, push commits' },
+      { prefix: 'fabric.git.branches', local_pref: 100, confidence_floor: 0.7, description: 'Branch management — list, create, delete, protect branches' },
+      { prefix: 'fabric.git.pulls', local_pref: 100, confidence_floor: 0.7, description: 'Pull request operations — list, get, create, merge PRs' },
+      { prefix: 'fabric.git.files', local_pref: 100, confidence_floor: 0.7, description: 'File operations — get file content, list directory trees' },
     ],
   };
 
