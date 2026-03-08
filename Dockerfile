@@ -1,7 +1,7 @@
 FROM node:22-alpine AS builder
 WORKDIR /app
 COPY package*.json ./
-RUN npm ci
+RUN npm install
 COPY tsconfig.json ./
 COPY src/ ./src/
 COPY bin/ ./bin/
@@ -15,7 +15,7 @@ RUN apk add --no-cache git && \
     addgroup -g 1001 -S fabric && adduser -u 1001 -S fabric -G fabric
 WORKDIR /app
 COPY package*.json ./
-RUN npm ci --omit=dev && npm cache clean --force
+RUN npm install --omit=dev && npm cache clean --force
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/bin ./bin
 USER fabric
