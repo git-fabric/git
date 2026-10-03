@@ -1,3 +1,5 @@
+<p align="center"><img src="docs/banner.svg" alt="git: Commit, push, branch, PR and repo management via MCP" width="100%"></p>
+
 # @git-fabric/git
 
 Git operations fabric app -- commit, push, branch, PR, and repo management as a composable MCP layer.
@@ -110,3 +112,8 @@ const app = createApp();
 ## License
 
 MIT
+
+<!-- org-footer -->
+---
+
+<p align="center"><sub>Part of <a href="https://github.com/git-fabric">git-fabric</a> · composable fabric apps for Git-native infrastructure · built by <a href="https://github.com/ry-ops">ry-ops</a></sub></p>
