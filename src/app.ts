@@ -24,6 +24,7 @@ interface FabricTool {
   name: string;
   description: string;
   inputSchema: Record<string, unknown>;
+  annotations?: { readOnlyHint?: boolean; destructiveHint?: boolean; idempotentHint?: boolean; openWorldHint?: boolean };
   execute: (args: Record<string, unknown>) => Promise<unknown>;
 }
 
@@ -47,6 +48,7 @@ export function createApp(githubOverride?: GitHubAdapter): FabricApp {
     {
       name: "git_repo_list",
       description: "List repositories for an org or the authenticated user.",
+      annotations: { readOnlyHint: true },
       inputSchema: {
         type: "object",
         properties: {
@@ -59,6 +61,7 @@ export function createApp(githubOverride?: GitHubAdapter): FabricApp {
     {
       name: "git_repo_get",
       description: "Get full details for a repository.",
+      annotations: { readOnlyHint: true },
       inputSchema: {
         type: "object",
         properties: {
@@ -73,6 +76,7 @@ export function createApp(githubOverride?: GitHubAdapter): FabricApp {
     {
       name: "git_repo_create",
       description: "Create a new repository in an org.",
+      annotations: { readOnlyHint: false, destructiveHint: false },
       inputSchema: {
         type: "object",
         properties: {
@@ -96,6 +100,7 @@ export function createApp(githubOverride?: GitHubAdapter): FabricApp {
     {
       name: "git_repo_delete",
       description: "Permanently delete a repository. Irreversible.",
+      annotations: { readOnlyHint: false, destructiveHint: true },
       inputSchema: {
         type: "object",
         properties: {
@@ -115,6 +120,7 @@ export function createApp(githubOverride?: GitHubAdapter): FabricApp {
     {
       name: "git_file_get",
       description: "Get the content of a file from a repository.",
+      annotations: { readOnlyHint: true },
       inputSchema: {
         type: "object",
         properties: {
@@ -132,6 +138,7 @@ export function createApp(githubOverride?: GitHubAdapter): FabricApp {
     {
       name: "git_file_list",
       description: "List files and directories at a path in a repository.",
+      annotations: { readOnlyHint: true },
       inputSchema: {
         type: "object",
         properties: {
@@ -151,6 +158,7 @@ export function createApp(githubOverride?: GitHubAdapter): FabricApp {
     {
       name: "git_commit_list",
       description: "List recent commits on a branch.",
+      annotations: { readOnlyHint: true },
       inputSchema: {
         type: "object",
         properties: {
@@ -168,6 +176,7 @@ export function createApp(githubOverride?: GitHubAdapter): FabricApp {
     {
       name: "git_commit_get",
       description: "Get full details for a commit including changed files.",
+      annotations: { readOnlyHint: true },
       inputSchema: {
         type: "object",
         properties: {
@@ -184,6 +193,7 @@ export function createApp(githubOverride?: GitHubAdapter): FabricApp {
     {
       name: "git_commit_compare",
       description: "Compare two refs (branches, tags, or SHAs) to see divergence and changed files.",
+      annotations: { readOnlyHint: true },
       inputSchema: {
         type: "object",
         properties: {
@@ -201,6 +211,7 @@ export function createApp(githubOverride?: GitHubAdapter): FabricApp {
     {
       name: "git_commit_push",
       description: "Commit one or more files to a branch via the GitHub Git Data API. Creates the branch first if createBranch is true.",
+      annotations: { readOnlyHint: false, destructiveHint: false },
       inputSchema: {
         type: "object",
         properties: {
@@ -240,6 +251,7 @@ export function createApp(githubOverride?: GitHubAdapter): FabricApp {
     {
       name: "git_branch_list",
       description: "List branches in a repository.",
+      annotations: { readOnlyHint: true },
       inputSchema: {
         type: "object",
         properties: {
@@ -255,6 +267,7 @@ export function createApp(githubOverride?: GitHubAdapter): FabricApp {
     {
       name: "git_branch_create",
       description: "Create a new branch from an existing branch.",
+      annotations: { readOnlyHint: false, destructiveHint: false },
       inputSchema: {
         type: "object",
         properties: {
@@ -274,6 +287,7 @@ export function createApp(githubOverride?: GitHubAdapter): FabricApp {
     {
       name: "git_branch_delete",
       description: "Delete a branch. Will fail if the branch is protected.",
+      annotations: { readOnlyHint: false, destructiveHint: true },
       inputSchema: {
         type: "object",
         properties: {
@@ -290,6 +304,7 @@ export function createApp(githubOverride?: GitHubAdapter): FabricApp {
     {
       name: "git_branch_protect",
       description: "Apply branch protection rules.",
+      annotations: { readOnlyHint: false, destructiveHint: true, idempotentHint: true },
       inputSchema: {
         type: "object",
         properties: {
@@ -317,6 +332,7 @@ export function createApp(githubOverride?: GitHubAdapter): FabricApp {
     {
       name: "git_pr_list",
       description: "List pull requests in a repository.",
+      annotations: { readOnlyHint: true },
       inputSchema: {
         type: "object",
         properties: {
@@ -333,6 +349,7 @@ export function createApp(githubOverride?: GitHubAdapter): FabricApp {
     {
       name: "git_pr_get",
       description: "Get full details for a pull request including files changed, labels, and review state.",
+      annotations: { readOnlyHint: true },
       inputSchema: {
         type: "object",
         properties: {
@@ -349,6 +366,7 @@ export function createApp(githubOverride?: GitHubAdapter): FabricApp {
     {
       name: "git_pr_create",
       description: "Open a pull request.",
+      annotations: { readOnlyHint: false, destructiveHint: false },
       inputSchema: {
         type: "object",
         properties: {
@@ -379,6 +397,7 @@ export function createApp(githubOverride?: GitHubAdapter): FabricApp {
     {
       name: "git_pr_merge",
       description: "Merge a pull request.",
+      annotations: { readOnlyHint: false, destructiveHint: false },
       inputSchema: {
         type: "object",
         properties: {
